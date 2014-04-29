@@ -14,8 +14,9 @@ public class NewPointScript : MonoBehaviour {
     Double anchorUnityX, anchorUnityY, anchorAtlasI, anchorAtlasJ, pixelsPerMeter;
     //Double anchorAtlasX, anchorAtlasY;
 
-    string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9016;Database=indooratlasdb;User ID=indooratlasuser;Password=u36prsiT;Pooling=true;CharSet=utf8;";
-	MySqlConnection con = null;
+    //string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9016;Database=indooratlasdb;User ID=indooratlasuser;Password=u36prsiT;Pooling=true;CharSet=utf8;";
+    string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9016;Database=indooratlasdb;User ID=indooratlasr;Password=VbUo98ch;Pooling=true;CharSet=utf8;";
+    MySqlConnection con = null;
 	MySqlCommand cmd = null;
 	MySqlDataReader read = null;
 
