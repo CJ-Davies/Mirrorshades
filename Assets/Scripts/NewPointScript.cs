@@ -71,14 +71,16 @@ public class NewPointScript : MonoBehaviour {
 
         double xDiff, yDiff, xNewPos, yNewPos;
 
-        while (true) {
-            // My Nexus 5
-            //string query = "SELECT x, y from devicelocations where deviceID = '4192fe2d3b7fbf27';";
-            string query = "SELECT i, j, virtual from devicelocations where deviceID = '4192fe2d3b7fbf27';";
+        // My Nexus 5
+        //string query = "SELECT x, y from devicelocations where deviceID = '4192fe2d3b7fbf27';";
+        //string query = "SELECT i, j, virtual from devicelocations where deviceID = '4192fe2d3b7fbf27';";
+        string query = "SELECT i, j from devicelocations where deviceID = '4192fe2d3b7fbf27';";
 
-            //Group's Nexus 4
-            //string query = "SELECT x, y from devicelocations where deviceID = 'c76129348d8acd2e';";
-            //string query = "SELECT i, j, virtual from devicelocations where deviceID = 'c76129348d8acd2e';";
+        //Group's Nexus 4
+        //string query = "SELECT x, y from devicelocations where deviceID = 'c76129348d8acd2e';";
+        //string query = "SELECT i, j, virtual from devicelocations where deviceID = 'c76129348d8acd2e';";
+
+        while (true) {
 
             try {
                 if (con.State.CompareTo(ConnectionState.Open) != 0) {
@@ -98,7 +100,7 @@ public class NewPointScript : MonoBehaviour {
                                 yDiff = Math.Abs((read.GetDouble(1) - anchorAtlasJ));
                                 Double yDiffMeters = yDiff / pixelsPerMeter;
 
-                                virt = (read.GetBoolean(2));
+                                //virt = (read.GetBoolean(2));
                                 //Debug.Log("virt flag: " + virt);
 
                                 //if (read.GetDouble(0) > anchorAtlasX)
