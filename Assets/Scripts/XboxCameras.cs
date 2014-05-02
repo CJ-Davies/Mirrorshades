@@ -8,6 +8,7 @@ public class XboxCameras : MonoBehaviour {
     public float rTrigger { get; set; }
 
     public float autoSwitchSpacing, autoSwitchDuration, baseOpacity;
+    float mappedTrig;
 
     bool Btog, autoTick, postSwitch, constantOpacity;
 
@@ -42,7 +43,13 @@ public class XboxCameras : MonoBehaviour {
         B = Input.GetButton("Fire2");
         rTrigger = Input.GetAxis("Horizontal");
 
-        float mappedTrig = (rTrigger * (1 - baseOpacity) + baseOpacity);
+        //If base opacity is anything other than 1, map the triggers range so that the whole range is used for what opacity we have.
+        if (baseOpacity != 1) {
+            mappedTrig = (rTrigger * (1 - baseOpacity) + baseOpacity);
+        }
+        else {
+            mappedTrig = rTrigger;
+        }
 
         if (!autoTick) {
 

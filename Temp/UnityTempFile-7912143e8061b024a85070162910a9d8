@@ -1,0 +1,65 @@
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp-Editor.dll
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/Managed/UnityEngine.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/Managed/UnityEditor.dll"
+-r:Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
+-r:Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll
+-r:Library/ScriptAssemblies/Assembly-CSharp.dll
+-r:Assets/Libraries/I18N.CJK.dll
+-r:Assets/Libraries/I18N.dll
+-r:Assets/Libraries/I18N.MidEast.dll
+-r:Assets/Libraries/I18N.Other.dll
+-r:Assets/Libraries/I18N.Rare.dll
+-r:Assets/Libraries/I18N.West.dll
+-r:Assets/Libraries/mysql.data.dll
+-r:Assets/Libraries/System.Data.dll
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/PlaybackEngines/iPhonePlayer/EditorExtensions/UnityEditor.iOS.Extensions.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/PlaybackEngines/WP8Support/EditorExtensions/UnityEditor.WP8.Extensions.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/PlaybackEngines/MetroSupport/EditorExtensions/UnityEditor.Metro.Extensions.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/PlaybackEngines/BB10Player/EditorExtensions/UnityEditor.BB10.Extensions.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/EditorExtensions/UnityEditor.Android.Extensions.dll"
+-r:"D:\Unity installs\4.3.4f1\Editor\Data\PackageManager\Unity\PackageManager\4.3.4\Unity.PackageManager.dll"
+-define:UNITY_STANDALONE_WIN
+-define:ENABLE_MICROPHONE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_AUDIO_FMOD
+-define:UNITY_STANDALONE
+-define:ENABLE_MONO
+-define:ENABLE_SPRITES
+-define:ENABLE_TERRAIN
+-define:ENABLE_GENERICS
+-define:ENABLE_SUBSTANCE
+-define:INCLUDE_WP8SUPPORT
+-define:ENABLE_MOVIES
+-define:ENABLE_WWW
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_WEBCAM
+-define:INCLUDE_METROSUPPORT
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_NETWORK
+-define:ENABLE_PHYSICS
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_SHADOWS
+-define:ENABLE_AUDIO
+-define:ENABLE_NAVMESH_CARVING
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:UNITY_4_3_4
+-define:UNITY_4_3
+-define:ENABLE_PROFILER
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_WIN
+-define:UNITY_TEAM_LICENSE
+Assets/OVR/Editor/OVRBuild.cs
+Assets/OVR/Editor/OVRCameraControllerEditor.cs
+Assets/OVR/Editor/OVRDeviceEditor.cs
+Assets/OVR/Editor/OVREditorGUIUtility.cs
+Assets/OVR/Editor/OVRPlayerControllerEditor.cs
+Assets/OVR/Editor/OVRPrefabs.cs
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/Mono\lib/mono/2.0\System.Runtime.Serialization.dll"
+-r:"D:/Unity installs/4.3.4f1/Editor/Data/Mono\lib/mono/2.0\System.Xml.Linq.dll"
