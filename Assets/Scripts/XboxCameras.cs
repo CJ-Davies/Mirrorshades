@@ -6,11 +6,12 @@ public class XboxCameras : MonoBehaviour {
     public bool A { get; set; }
     public bool B { get; set; }
     public float rTrigger { get; set; }
+    public bool autoTick { get; set; }
 
     public float autoSwitchSpacing, autoSwitchDuration, baseOpacity;
     float mappedTrig;
 
-    bool Btog, autoTick, postSwitch, constantOpacity;
+    bool Btog, postSwitch, constantOpacity;
 
     Color originalColour;
 

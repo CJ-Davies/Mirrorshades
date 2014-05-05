@@ -19,15 +19,15 @@ public class DataLogger : MonoBehaviour {
 
     Vector3 position;
     Quaternion leftRotation, rightRotation;
-    float leftWebCamTextureOpacity, rightWebCamTextureOpacity, rTrigger;
-    bool A, B;
+    float leftWebCamTextureOpacity, rightWebCamTextureOpacity, baseOpacity, rTrigger, autoSwitchSpacing, autoSwitchDuration;
+    bool A, B, autoTick;
 
     //for calculating FPS
     float deltaTime = 0.0f;
     float fps;
 
-    // <timestamp> <position (vector3)> <orientation[L] (quaternion)> <orientation[L] (quaternion)> <webcam opacity[L]> <webcam opacity[R]> <FPS> <A> <B> <rTrigger>
-    // 29-04-2014 16-45-11-654 (1.8, 1.0, -8.3) (-0.1, -0.7, -0.1, 0.7) (-0.1, -0.7, -0.1, 0.7) 1 1 38.38756 False False 0
+    // <timestamp> <position> <leftRotation> <rightRotation> <baseOpacity> <leftWebCamTextureOpacity> <rightWebCamOpacity>
+    // <autoTick> <autoSwitchDuration> <autoSwitchSpacing> <fps> <A button> <B button> <rTrigger>
     string lines;
 
     void Start () {
@@ -52,14 +52,20 @@ public class DataLogger : MonoBehaviour {
         position = player.transform.position;
         leftRotation = leftCam.transform.rotation;
         rightRotation = rightCam.transform.rotation;
+        baseOpacity = player.GetComponent<XboxCameras>().baseOpacity;
         leftWebCamTextureOpacity = leftWebCamTexture.renderer.material.color.a;
         rightWebCamTextureOpacity = rightWebCamTexture.renderer.material.color.a;
+        autoTick = player.GetComponent<XboxCameras>().autoTick;
+        autoSwitchDuration = player.GetComponent<XboxCameras>().autoSwitchDuration;
+        autoSwitchSpacing = player.GetComponent<XboxCameras>().autoSwitchSpacing;
         A = player.GetComponent<XboxCameras>().A;
         B = player.GetComponent<XboxCameras>().B;
         rTrigger = player.GetComponent<XboxCameras>().rTrigger;
 
-        lines += ((timestamp + " " + position + " " + leftRotation + " " + rightRotation + " " + leftWebCamTextureOpacity
-             + " " + rightWebCamTextureOpacity + " " + fps + " " + A + " " + B + " " + rTrigger + "\n"));
+        //assembling the current frame's log line
+        lines += ((timestamp + " " + position + " " + leftRotation + " " + rightRotation + " " + baseOpacity + " " + leftWebCamTextureOpacity
+             + " " + rightWebCamTextureOpacity + " " + autoTick + " " + autoSwitchDuration + " " + autoSwitchSpacing + " " +  fps
+             + " " + A + " " + B + " " + rTrigger + "\n"));
 
         //on each certain multiple of frames, write the contents of lines out to a file & then clear lines
         if (count == 100) {
