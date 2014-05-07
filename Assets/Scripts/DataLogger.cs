@@ -12,6 +12,9 @@ public class DataLogger : MonoBehaviour {
     //how many frames between writing lines out to file
     int count;
 
+    //how many frames have elapsed
+    uint frame;
+
     //the player object its two (Unity) camera objects
     GameObject player, leftCam, rightCam, leftWebCamTexture, rightWebCamTexture;
 
@@ -26,7 +29,7 @@ public class DataLogger : MonoBehaviour {
     float deltaTime = 0.0f;
     float fps;
 
-    // <timestamp> <position> <leftRotation> <rightRotation> <baseOpacity> <leftWebCamTextureOpacity> <rightWebCamOpacity>
+    // <frame> <timestamp> <position> <leftRotation> <rightRotation> <baseOpacity> <leftWebCamTextureOpacity> <rightWebCamOpacity>
     // <autoTick> <autoSwitchDuration> <autoSwitchSpacing> <fps> <A button> <B button> <rTrigger>
     string lines;
 
@@ -38,6 +41,12 @@ public class DataLogger : MonoBehaviour {
         rightCam = GameObject.Find("CameraRight");
         leftWebCamTexture = GameObject.Find("WebcamLeft");
         rightWebCamTexture = GameObject.Find("WebcamRight");
+
+        //write header to log
+        file = new StreamWriter(filePath, true);
+        file.Write("\"frame\"\t\"timestamp\"\t\"position\"\t\"left_rotation\"\t\"right_rotation\"\t\"base_oapcity\"\t\"left_opacity" + 
+            "\"\t\"right_opacity\"\t\"auto_tick\"\t\"auto_duration\"\t\"auto_spacing\"\t\"framerate\"\t\"A_button\"\t\"B_button\"\t\"right_trigger\"\n");
+        file.Close();
 	}
 	
 	void Update () {
@@ -63,15 +72,15 @@ public class DataLogger : MonoBehaviour {
         rTrigger = player.GetComponent<XboxCameras>().rTrigger;
 
         //assembling the current frame's log line
-        lines += ((timestamp + " " + position + " " + leftRotation + " " + rightRotation + " " + baseOpacity + " " + leftWebCamTextureOpacity
-             + " " + rightWebCamTextureOpacity + " " + autoTick + " " + autoSwitchDuration + " " + autoSwitchSpacing + " " +  fps
-             + " " + A + " " + B + " " + rTrigger + "\n"));
+        lines += ((frame + "\t" + timestamp + "\t" + position + "\t" + leftRotation + "\t" + rightRotation + "\t" + baseOpacity + "\t" + leftWebCamTextureOpacity
+             + "\t" + rightWebCamTextureOpacity + "\t" + autoTick + "\t" + autoSwitchDuration + "\t" + autoSwitchSpacing + "\t" +  fps
+             + "\t" + A + "\t" + B + "\t" + rTrigger + "\n"));
 
         //on each certain multiple of frames, write the contents of lines out to a file & then clear lines
         if (count == 100) {
             //write lines to file
             file = new StreamWriter(filePath, true);
-            file.WriteLine(lines);
+            file.Write(lines);
             file.Close();
 
             count = -1;
@@ -79,6 +88,7 @@ public class DataLogger : MonoBehaviour {
         }
         
         ++count;
+        ++frame;
 	}
 
     void OnApplicationQuit() {
