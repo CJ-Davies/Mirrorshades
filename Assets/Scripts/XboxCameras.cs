@@ -5,6 +5,7 @@ public class XboxCameras : MonoBehaviour {
 
     public bool A { get; set; }
     public bool B { get; set; }
+    public bool X { get; set; }
     public float rTrigger { get; set; }
     public bool autoTick { get; set; }
 
@@ -15,13 +16,15 @@ public class XboxCameras : MonoBehaviour {
 
     Color originalColour;
 
-    GameObject CameraLeft, CameraRight, WebcamLeft, WebcamRight;
+    GameObject CameraLeft, CameraRight, WebcamLeft, WebcamRight, player;
 
 	// Use this for initialization
 	void Start () {
         //CameraLeft = GameObject.Find("CameraLeft");
         //CameraRight = GameObject.Find("CameraRight");
-        
+
+        player = GameObject.Find("OVRPlayerController2");
+
         WebcamLeft = GameObject.Find("WebcamLeft");
         WebcamRight = GameObject.Find("WebcamRight");
 
@@ -42,7 +45,12 @@ public class XboxCameras : MonoBehaviour {
 
         A = Input.GetButton("Fire1");
         B = Input.GetButton("Fire2");
+        X = Input.GetButton("Fire3");
         rTrigger = Input.GetAxis("Horizontal");
+
+        if (X) {
+            player.GetComponent<DataLogger>().activated = true;
+        }
 
         //If base opacity is anything other than 1, map the triggers range so that the whole range is used for what opacity we have.
         if (baseOpacity != 1) {
