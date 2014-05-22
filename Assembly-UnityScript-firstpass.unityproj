@@ -54,6 +54,7 @@
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\OVR\OVRImageEffects\OVRLensCorrection_Mesh.shader" />
      <None Include="Assets\OVR\OVRImageEffects\OVRLensCorrection_Mesh_CA.shader" />
+     <None Include="Assets\TransparentSingleColorShader.shader" />
      <None Include="Assets\OVR\OVRImageEffects\OVRLensCorrection_Mesh_CA_TW.shader" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
      <None Include="Assets\OVR\OVRImageEffects\OVRLensCorrection_CA.shader" />

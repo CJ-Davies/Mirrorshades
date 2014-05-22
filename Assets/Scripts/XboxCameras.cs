@@ -16,7 +16,7 @@ public class XboxCameras : MonoBehaviour {
 
     Color originalColour;
 
-    GameObject CameraLeft, CameraRight, WebcamLeft, WebcamRight, player;
+    GameObject CameraLeft, CameraRight, WebcamLeft, WebcamRight, player, WebcamLeftBacking, WebcamRightBacking;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,11 @@ public class XboxCameras : MonoBehaviour {
 
         WebcamLeft = GameObject.Find("WebcamLeft");
         WebcamRight = GameObject.Find("WebcamRight");
+
+        WebcamLeftBacking = GameObject.Find("WebcamLeftBacking");
+        WebcamRightBacking = GameObject.Find("WebcamRightBacking");
+
+        WebcamLeftBacking.renderer.material.SetColor("_SpecColor", Color.red);
 
         GameObject.Find("CameraLeft").camera.cullingMask = ((1 << 30) | (1 << 0)); //1 << 30;
         GameObject.Find("CameraRight").camera.cullingMask = ((1 << 31) | (1 << 0)); //1 << 31;
@@ -66,9 +71,11 @@ public class XboxCameras : MonoBehaviour {
             if (A && !Btog) {
                 originalColour = WebcamLeft.renderer.material.color;
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 0.0f);
+                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
                 originalColour = WebcamRight.renderer.material.color;
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 0.0f);
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
             }
             //switching to VR
             else if (B) {
@@ -76,32 +83,40 @@ public class XboxCameras : MonoBehaviour {
 
                 originalColour = WebcamLeft.renderer.material.color;
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(originalColour.a, 0.0f, 0.1f));
+                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(originalColour.a, 0.0f, 0.1f));
 
                 originalColour = WebcamRight.renderer.material.color;
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(originalColour.a, 0.0f, 0.1f));
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(originalColour.a, 0.0f, 0.1f));
             }
             //switching to RW
             else if (!B && Btog) {
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
+                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
 
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
             }
             //switching to trigger (VR or mix)
             else if (rTrigger != 0 && !Btog) {
                 originalColour = WebcamLeft.renderer.material.color;
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 1 - mappedTrig);
+                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 1 - mappedTrig);
 
                 originalColour = WebcamRight.renderer.material.color;
-                WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 1 - mappedTrig);  
+                WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 1 - mappedTrig);
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 1 - mappedTrig);  
             }
             //switching to RW
             else if (rTrigger == 0 && !Btog) {
 
                 originalColour = WebcamLeft.renderer.material.color;
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, baseOpacity);
+                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, baseOpacity);
 
                 originalColour = WebcamRight.renderer.material.color;
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, baseOpacity);
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, baseOpacity);
             }
             if (Btog && WebcamLeft.renderer.material.color.a >= (baseOpacity - 0.05) && WebcamRight.renderer.material.color.a >= (baseOpacity - 0.05)) {
                 Btog = false;
@@ -125,9 +140,11 @@ public class XboxCameras : MonoBehaviour {
 
                     originalColour = WebcamLeft.renderer.material.color;
                     WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, baseOpacity);
+                    WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, baseOpacity);
 
                     originalColour = WebcamRight.renderer.material.color;
                     WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, baseOpacity);
+                    WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, baseOpacity);
                 }
                 yield return new WaitForSeconds(autoSwitchSpacing);
             }
@@ -145,9 +162,11 @@ public class XboxCameras : MonoBehaviour {
 
                         originalColour = WebcamLeft.renderer.material.color;
                         WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 0.0f);
+                        WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
                         originalColour = WebcamRight.renderer.material.color;
                         WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 0.0f);
+                        WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                     }
                 }
                 yield return new WaitForSeconds(autoSwitchDuration);
