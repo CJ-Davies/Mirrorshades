@@ -31,8 +31,6 @@ public class XboxCameras : MonoBehaviour {
         WebcamLeftBacking = GameObject.Find("WebcamLeftBacking");
         WebcamRightBacking = GameObject.Find("WebcamRightBacking");
 
-        WebcamLeftBacking.renderer.material.SetColor("_SpecColor", Color.red);
-
         GameObject.Find("CameraLeft").camera.cullingMask = ((1 << 30) | (1 << 0)); //1 << 30;
         GameObject.Find("CameraRight").camera.cullingMask = ((1 << 31) | (1 << 0)); //1 << 31;
 

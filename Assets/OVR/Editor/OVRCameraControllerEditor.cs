@@ -67,7 +67,8 @@ public class OVRCameraControllerEditor : Editor
 			
 			m_Component.VerticalFOV         = EditorGUILayout.FloatField("Vertical FOV", m_Component.VerticalFOV);
 			m_Component.IPD         		= EditorGUILayout.FloatField("IPD", m_Component.IPD);
-			
+			m_Component.ScaleRenderTarget   = EditorGUILayout.FloatField("Scale Render", m_Component.ScaleRenderTarget);
+
 			OVREditorGUIUtility.Separator();
 			
 			m_Component.CameraRootPosition  = EditorGUILayout.Vector3Field("Camera Root Position", m_Component.CameraRootPosition);
@@ -95,6 +96,9 @@ public class OVRCameraControllerEditor : Editor
 			m_Component.WireMode     		= EditorGUILayout.Toggle ("Wire-Frame Mode", m_Component.WireMode);
 
 			OVREditorGUIUtility.Separator();
+
+			m_Component.UseCameraTexture    = EditorGUILayout.Toggle ("Use Camera Texture", m_Component.UseCameraTexture);
+			m_Component.CameraTextureScale  = EditorGUILayout.FloatField("Camera Texture Scale", m_Component.CameraTextureScale);
 			m_Component.LensCorrection     	= EditorGUILayout.Toggle ("Lens Correction", m_Component.LensCorrection);
 			m_Component.Chromatic     		= EditorGUILayout.Toggle ("Chromatic", m_Component.Chromatic);
 			m_Component.FlipCorrectionInY   = EditorGUILayout.Toggle ("FlipY", m_Component.FlipCorrectionInY);

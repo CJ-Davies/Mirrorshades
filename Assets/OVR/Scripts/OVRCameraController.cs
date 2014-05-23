@@ -67,7 +67,36 @@ public class OVRCameraController : OVRComponent
 	public 	float		VerticalFOV
 	{
 		get{return verticalFOV;}
-		set{verticalFOV = value; UpdateCamerasDirtyFlag = true;}
+		set
+		{
+			verticalFOV = Mathf.Clamp(value, 40.0f, 170.0f);
+			UpdateCamerasDirtyFlag = true;
+		}
+	}
+
+	// If true, renders to a RenderTexture to allow super-sampling.
+	public bool UseCameraTexture = false;
+
+	// A constant multiple of the ideal resolution, which enables supersampling for higher image quality.
+	public float CameraTextureScale = 1.0f;
+
+	// SCALE RENDER TARGET
+	[SerializeField]
+	private float		scaleRenderTarget = 1.0f;
+	public	float 		ScaleRenderTarget
+	{
+		get{return scaleRenderTarget;}
+		set
+		{
+			scaleRenderTarget = value;
+			if(scaleRenderTarget > 1.0f)
+				scaleRenderTarget = 1.0f;
+			else if (scaleRenderTarget < 0.01f)
+				scaleRenderTarget = 0.01f;
+
+			// We will call this initially to grab the serialized value
+			SetScaleRenderTarget();
+		}
 	}
 
 	// Camera positioning:
@@ -166,7 +195,7 @@ public class OVRCameraController : OVRComponent
 		// Initialize the cameras
 		UpdateCamerasDirtyFlag = true;
 		UpdateCameras();
-		
+		SetScaleRenderTarget();
 		SetMaximumVisualQuality();
 		
 	}
@@ -207,6 +236,35 @@ public class OVRCameraController : OVRComponent
 //		OVRDevice.SetHeadModel(EyeCenterPosition.x, EyeCenterPosition.y, EyeCenterPosition.z);
 	}
 
+	/// <summary>
+	/// Sets the scale render target.
+	/// </summary>
+	void SetScaleRenderTarget()
+	{
+		// OPTIMIZE ME!!!
+		if((CameraLeft != null && CameraRight != null))
+		{
+			// Aquire and scale the cameras
+			OVRCamera[] cameras = gameObject.GetComponentsInChildren<OVRCamera>();
+			for (int i = 0; i < cameras.Length; i++)
+			{
+				Rect r = new Rect(0.5f - (scaleRenderTarget * 0.5f) + ((cameras[i].RightEye) ? 0.5f : 0f), 
+				                  0.5f - (scaleRenderTarget * 0.5f), 
+				                  0.5f * scaleRenderTarget, 
+				                  scaleRenderTarget);
+
+				cameras[i].camera.rect = r;
+			}
+			
+			// Aquire and Scale the lens correction components
+			OVRLensCorrection[] lc = gameObject.GetComponentsInChildren<OVRLensCorrection>();
+			for (int i = 0; i < lc.Length; i++)
+			{
+				lc[i].dynamicScale = scaleRenderTarget;
+			}
+		}
+	}
+	
 	/// <summary>
 	/// Updates the cameras.
 	/// </summary>

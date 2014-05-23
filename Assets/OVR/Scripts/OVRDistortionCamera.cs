@@ -112,6 +112,19 @@ public class OVRDistortionCamera : OVRComponent
 		
 		if(CameraController == null)
 			Debug.LogWarning("WARNING: OVRCameraController not found!");
+
+		// Without this, we will be drawing 1 frame behind
+		camera.depth = Mathf.Max (CameraLeft.depth, CameraRight.depth) + 1;
+		
+		// Don't want the camera to render anything..
+		camera.cullingMask = 0;
+		camera.eventMask = 0;
+		camera.useOcclusionCulling = false;
+		camera.backgroundColor = Color.black;
+		camera.clearFlags = (!CameraController.UseCameraTexture) ? CameraClearFlags.Nothing :
+			CameraClearFlags.SolidColor; // TBD: This may be a performance loss on mobile.
+		camera.renderingPath = RenderingPath.Forward;
+		camera.orthographic = true;
 	}
 	
 	/// <summary>
@@ -132,8 +145,9 @@ public class OVRDistortionCamera : OVRComponent
 		// Clear the destination
 		GL.Clear (false, true, Color.black);
 
-		DistortEye (false);
-        DistortEye (true);
+		RenderTexture undistorted = (CameraController.UseCameraTexture) ? OVRCamera.CameraTexture : source;
+		DistortEye (false, undistorted);
+        DistortEye (true, undistorted);
 
         //Flush and end distortion timing.
         GL.IssuePluginEvent(1);
@@ -147,14 +161,14 @@ public class OVRDistortionCamera : OVRComponent
 	/// <summary>
 	/// Applies lens correction to the image for the given eye.
 	/// </summary>
-	void DistortEye(bool rightEye)
+	void DistortEye(bool rightEye, RenderTexture undistorted)
 	{
 		Camera activeCam = (rightEye) ? CameraRight : CameraLeft;
 		var ovrCam = activeCam.GetComponent<OVRCamera>();
 		
 		if(!CameraController.LensCorrection)
 		{
-			UndistortedMaterial.mainTexture = activeCam.targetTexture;
+			UndistortedMaterial.mainTexture = undistorted;
 			var rect = new Rect(rightEye ? 0.5f : 0f, 0f, 0.5f, 1f);
 			DrawFullScreenQuad (UndistortedMaterial, rect);
 			return;
@@ -171,7 +185,7 @@ public class OVRDistortionCamera : OVRComponent
 			material = lc.GetMaterial_MeshDistort();
 		
 		// Assign the source texture to a property from a shader
-		material.mainTexture = activeCam.targetTexture;
+		material.mainTexture = undistorted;
 
 		float halfWidth = 0.5f * Screen.width;
 		GL.Viewport(new Rect(rightEye ? halfWidth : 0f, 0f, halfWidth, Screen.height));

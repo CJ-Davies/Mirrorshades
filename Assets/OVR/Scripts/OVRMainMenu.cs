@@ -23,6 +23,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ************************************************************************************/
+//#define SHOW_DK2_VARIABLES
+
 using UnityEngine;
 using System.Collections;
 
@@ -144,13 +146,17 @@ public class OVRMainMenu : MonoBehaviour
 	public Texture  CrosshairImage 			= null;
 	private OVRCrosshair Crosshair        	= new OVRCrosshair();
 
-	// Low persistance mode on/off 
-	private bool LowPersistanceMode = true;
-	private string strLPM = "LowPersistanceMode: ON";
+	// Low Persistence mode on/off 
+	private bool LowPersistenceMode = true;
+#if	SHOW_DK2_VARIABLES
+	private string strLPM = "LowPersistenceMode: ON";
+#endif
 	
 	// Vision mode on/off
 	private bool VisionMode = true;
+#if	SHOW_DK2_VARIABLES
 	private string strVisionMode = "Vision Enabled: ON";
+#endif
 
 	// We want to hold onto GridCube, for potential sharing
 	// of the menu RenderTarget
@@ -217,7 +223,7 @@ public class OVRMainMenu : MonoBehaviour
 		if(CameraController != null)
 			CameraController.InitCameraControllerVariables();
 
-		// Set the GUI target 
+		// Set the GUI target
 		GUIRenderObject = GameObject.Instantiate(Resources.Load("OVRGUIObjectMain")) as GameObject;
 
 		if(GUIRenderObject != null)
@@ -250,18 +256,23 @@ public class OVRMainMenu : MonoBehaviour
 			if(CameraController != null)
 			{
 				// Grab transform of GUI object
-				Transform t = GUIRenderObject.transform;
+				Vector3 ls = GUIRenderObject.transform.localScale;
+				Vector3 lp = GUIRenderObject.transform.localPosition;
+				Quaternion lr = GUIRenderObject.transform.localRotation;
+
 				// Attach the GUI object to the camera
 				CameraController.AttachGameObjectToCamera(ref GUIRenderObject);
 				// Reset the transform values (we will be maintaining state of the GUI object
 				// in local state)
-				OVRUtils.SetLocalTransform(ref GUIRenderObject, ref t);
+
+				GUIRenderObject.transform.localScale = ls;
+				GUIRenderObject.transform.localRotation = lr;
+
 				// Deactivate object until we have completed the fade-in
 				// Also, we may want to deactive the render object if there is nothing being rendered
 				// into the UI
 				// we will move the position of everything over to the left, so get
 				// IPD / 2 and position camera towards negative X
-				Vector3 lp  = GUIRenderObject.transform.localPosition;
 				float   ipd = 0.0f;
 				CameraController.GetIPD(ref ipd);
 				lp.x -= ipd * 0.5f;
@@ -289,9 +300,10 @@ public class OVRMainMenu : MonoBehaviour
 		{
 			UpdateFunctions += UpdateIPD;
 			UpdateFunctions += UpdatePrediction;
+
 			// Set LPM on by default
-			UpdateFunctions += UpdateLowPersistanceMode;
-			OVRDevice.SetLowPersistanceMode(LowPersistanceMode);
+			UpdateFunctions += UpdateLowPersistenceMode;
+			OVRDevice.SetLowPersistenceMode(LowPersistenceMode);
 			UpdateFunctions += UpdateVisionMode;
 			UpdateFunctions += UpdateFOV;
 			UpdateFunctions += UpdateEyeHeightOffset;
@@ -472,23 +484,27 @@ public class OVRMainMenu : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Updates the low persistance mode.
+	/// Updates the low Persistence mode.
 	/// </summary>
-	void UpdateLowPersistanceMode()
+	void UpdateLowPersistenceMode()
 	{
 		if(Input.GetKeyDown (KeyCode.F1))
 		{
-			if(LowPersistanceMode == false)
+			if(LowPersistenceMode == false)
 			{
-				LowPersistanceMode = true;
-				strLPM = "Low Persistance Mode: ON";
-				OVRDevice.SetLowPersistanceMode(LowPersistanceMode);
+				LowPersistenceMode = true;
+#if	SHOW_DK2_VARIABLES
+				strLPM = "Low Persistence Mode: ON";
+#endif
+				OVRDevice.SetLowPersistenceMode(LowPersistenceMode);
 			}
 			else
 			{
-				LowPersistanceMode = false;
-				strLPM = "Low Persistance Mode: OFF";
-				OVRDevice.SetLowPersistanceMode(LowPersistanceMode);
+				LowPersistenceMode = false;
+#if	SHOW_DK2_VARIABLES
+				strLPM = "Low Persistence Mode: OFF";
+#endif
+				OVRDevice.SetLowPersistenceMode(LowPersistenceMode);
 			}
 		}
 	}
@@ -503,13 +519,17 @@ public class OVRMainMenu : MonoBehaviour
 			if(VisionMode == false)
 			{
 				VisionMode = true;
+#if	SHOW_DK2_VARIABLES
 				strVisionMode = "Vision Enabled: ON";
+#endif
 				OVRDevice.SetVisionEnabled(VisionMode);
 			}
 			else
 			{
 				VisionMode = false;
+#if	SHOW_DK2_VARIABLES
 				strVisionMode = "Vision Enabled: OFF";
+#endif
 				OVRDevice.SetVisionEnabled(VisionMode);
 			}
 		}
@@ -840,12 +860,15 @@ public class OVRMainMenu : MonoBehaviour
 
 		int y   = VRVarsSY;
 
-		// Print out Low Persistance Mode
+#if	SHOW_DK2_VARIABLES
+		// Print out Low Persistence Mode
 		GuiHelper.StereoBox (VRVarsSX, y, VRVarsWidthX, VRVarsWidthY, 
 							 ref strLPM, Color.red);
+ 
 		// Print out Vision Mode
 		GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
 							 ref strVisionMode, Color.green);
+#endif
 
 		// Print out auto mag correction state
 		MagCal.GUIMagYawDriftCorrection(VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY,
@@ -874,20 +897,6 @@ public class OVRMainMenu : MonoBehaviour
 			GuiHelper.StereoBox (VRVarsSX, y += StepY, VRVarsWidthX, VRVarsWidthY, 
 								 ref strSpeedRotationMultipler, Color.white);
 		}
-		
-		// Eventually remove distortion from being changed
-		/*
-		// Don't draw if CameraController is not present
-		if(CameraController != null)
-		{
-			// Distortion k values
-			y += StepY;
-			GUIStereoBox (VRVarsSX, y, VRVarsWidthX, VRVarsWidthY, 
-							 ref strDistortion, 
-							 Color.red);
-		}
-		*/
-			
 	}
 	
 	// SNAPSHOT MANAGEMENT

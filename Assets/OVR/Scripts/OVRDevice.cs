@@ -78,17 +78,11 @@ public class OVRDevice : MonoBehaviour
 	[DllImport (strOvrLib)]
 	private static extern bool OVR_IsSensorPresent();
 	[DllImport (strOvrLib)]
-    private static extern bool OVR_GetSensorOrientation(ref float w, ref float x, ref float y, ref float z);
-	[DllImport (strOvrLib)]
-    private static extern bool OVR_GetSensorPredictedOrientation(ref float w, ref float x, ref float y, ref float z);
-	[DllImport (strOvrLib)]
 	private static extern bool OVR_UseSensorPrediction(bool predictionOn);
 	[DllImport (strOvrLib)]
     private static extern bool OVR_GetSensorPredictionTime(ref float predictionTime);
 	[DllImport (strOvrLib)]
     private static extern bool OVR_SetSensorPredictionTime(float predictionTime);
-	[DllImport (strOvrLib)]
-    private static extern bool OVR_EnableYawCorrection(float enable);
 	[DllImport (strOvrLib)]
     private static extern bool OVR_ResetSensorOrientation();	
 	[DllImport (strOvrLib)]
@@ -115,7 +109,7 @@ public class OVRDevice : MonoBehaviour
 	[DllImport (strOvrLib)]
 	private static extern bool OVR_IsHMDPresent();
 	[DllImport (strOvrLib)]
-	private static extern void OVR_SetLowPersistanceMode(bool on); 
+	private static extern void OVR_SetLowPersistenceMode(bool on); 
 	[DllImport (strOvrLib)]	
 	private static extern bool OVR_GetPlayerEyeHeight(ref float eyeHeight);
 	[DllImport (strOvrLib)]
@@ -266,47 +260,6 @@ public class OVRDevice : MonoBehaviour
 		return OVR_IsSensorPresent();
 	}
 
-	/// <summary>
-	/// Gets the orientation.
-	/// </summary>
-	/// <returns><c>true</c>, if orientation was gotten, <c>false</c> otherwise.</returns>
-	/// <param name="q">Q.</param>
-	public static bool GetOrientation(ref Quaternion q)
-	{
-		float w = 0, x = 0, y = 0, z = 0;
-
-        if (OVR_GetSensorOrientation(ref w, ref x, ref y, ref z) == true)
-		{
-			q.w = w; q.x = x; q.y = y; q.z = z;	
-			OrientSensor(ref q);
-						
-			return true;
-		}
-		
-		return false;
-	}
-	
-	/// <summary>
-	/// Gets the predicted orientation.
-	/// </summary>
-	/// <returns><c>true</c>, if predicted orientation was gotten, <c>false</c> otherwise.</returns>
-	/// <param name="q">Q.</param>
-	public static bool GetPredictedOrientation(ref Quaternion q)
-	{
-		float w = 0, x = 0, y = 0, z = 0;
-
-        if (OVR_GetSensorPredictedOrientation(ref w, ref x, ref y, ref z) == true)
-		{
-			q.w = w; q.x = x; q.y = y; q.z = z;	
-			OrientSensor(ref q);
-	
-			return true;
-		}
-		
-		return false;
-
-	}		
-	
 	/// <summary>
 	/// Resets the orientation.
 	/// </summary>
@@ -537,7 +490,8 @@ public class OVRDevice : MonoBehaviour
 	{
 		float px = 0, py = 0, pz = 0, ow = 0, ox = 0, oy = 0, oz = 0;
 		
-		bool result = OVR_GetCameraPositionOrientation(ref  px,ref  py, ref  pz, ref  ox, ref  oy, ref  oz, ref  ow);
+		bool result = OVR_GetCameraPositionOrientation(ref  px, ref  py, ref  pz, 
+		                                               ref  ox, ref  oy, ref  oz, ref  ow);
 		
 		p.x = px; p.y = py; p.z = -pz;
 		o.w = ow; o.x = ox; o.y = oy; o.z = oz;
@@ -557,11 +511,11 @@ public class OVRDevice : MonoBehaviour
 	}
 	
 	/// <summary>
-	/// Sets the low persistance mode.
+	/// Sets the low Persistence mode.
 	/// </summary>
 	/// <param name="on">If set to <c>true</c> on.</param>
-	public static void SetLowPersistanceMode(bool on)
+	public static void SetLowPersistenceMode(bool on)
 	{
-		OVR_SetLowPersistanceMode(on);
+		OVR_SetLowPersistenceMode(on);
 	}
 }

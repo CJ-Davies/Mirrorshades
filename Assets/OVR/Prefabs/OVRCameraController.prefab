@@ -47,11 +47,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
+  - 20: {fileID: 2000004}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400012}
-  - 20: {fileID: 2000004}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400012}
   m_Layer: 8
   m_Name: OVRCameraController
   m_TagString: Untagged
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .421587944, z: -.78629458}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -100,7 +100,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: 0}
@@ -129,7 +129,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: 0}
@@ -160,7 +160,7 @@ Camera:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -171,16 +171,16 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
-  m_Depth: 4
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
 --- !u!81 &8100000
 AudioListener:
   m_ObjectHideFlags: 1
@@ -207,6 +207,7 @@ MonoBehaviour:
   _ChromaticAberration: {x: .995999992, y: .991999984, z: 1.01400006, w: 1.01400006}
   _DMScale: {x: 0, y: 0}
   _DMOffset: {x: 0, y: 0}
+  dynamicScale: 1
   material_CA: {fileID: 2100000, guid: 700ec7db7ac6ff24f9f4a3d4cd157910, type: 2}
   material_MeshDistort: {fileID: 2100000, guid: 88b24f42a9d4561489e930a935932e7c,
     type: 2}
@@ -245,6 +246,7 @@ MonoBehaviour:
   _ChromaticAberration: {x: .995999992, y: .991999984, z: 1.01400006, w: 1.01400006}
   _DMScale: {x: 0, y: 0}
   _DMOffset: {x: 0, y: 0}
+  dynamicScale: 1
   material_CA: {fileID: 2100000, guid: 700ec7db7ac6ff24f9f4a3d4cd157910, type: 2}
   material_MeshDistort: {fileID: 2100000, guid: 88b24f42a9d4561489e930a935932e7c,
     type: 2}
@@ -290,16 +292,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ipd: .064000003
   verticalFOV: 90
-  CameraRootPosition: {x: 0, y: 0, z: 0}
+  scaleRenderTarget: 1
+  CameraRootPosition: {x: 0, y: 1, z: 0}
   NeckPosition: {x: 0, y: 0, z: 0}
   EyeCenterPosition: {x: 0, y: .150000006, z: .0900000036}
-  UsePlayerEyeHeight: 0
+  UsePlayerEyeHeight: 1
   FollowOrientation: {fileID: 0}
   TrackerRotatesY: 0
   EnableOrientation: 1
   PredictionOn: 1
   CallInPreRender: 0
-  CameraTextureScale: 1.5
   WireMode: 0
   LensCorrection: 1
   Chromatic: 1
@@ -330,7 +332,7 @@ MonoBehaviour:
   HeightIncrement: .00999999978
   SpeedRotationIncrement: .0500000007
   LayerName: Default
-  CrosshairImage: {fileID: 0}
+  CrosshairImage: {fileID: 2800000, guid: 64ce76f827a71b44da62c30c0b506fd2, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -53,6 +53,9 @@ public class OVRLensCorrection : OVRImageEffectBase
 	[HideInInspector]
 	public Vector2 _DMOffset			= new Vector2(0.0f, 0.0f);
 
+	[HideInInspector]
+	public float dynamicScale 			= 1.0f;
+
 	//
 	// Called by camera to get lens correction values
 	// Use default material for this type of lens correction
@@ -79,7 +82,7 @@ public class OVRLensCorrection : OVRImageEffectBase
 	public Material material_MeshDistort;
 	public Material GetMaterial_MeshDistort()
 	{
-		material_MeshDistort.SetVector("_DMScale",	_DMScale);
+		material_MeshDistort.SetVector("_DMScale",	_DMScale * dynamicScale);
 		material_MeshDistort.SetVector("_DMOffset", _DMOffset);
 		return material_MeshDistort;
 	}
@@ -89,7 +92,7 @@ public class OVRLensCorrection : OVRImageEffectBase
 	public Material material_MeshDistort_CA;
 	public Material GetMaterial_MeshDistort_CA()
 	{
-		material_MeshDistort_CA.SetVector("_DMScale",  _DMScale);
+		material_MeshDistort_CA.SetVector("_DMScale",  _DMScale * dynamicScale);
 		material_MeshDistort_CA.SetVector("_DMOffset", _DMOffset);
 
 		return material_MeshDistort_CA;

@@ -83,12 +83,16 @@ public class OVRDistortionMesh
 	private static extern void OVR_TestDistortionMesh();
 
 	// We will fill in the mesh with distortion values
-	private Mesh 		mesh;
-	private Vector3[] 	positions;
-	private Vector2[] 	uvR; 		// TEXCOORD0
-	private Vector2[] 	uvG; 		// TEXCOORD1
-	private Vector3[] 	uvB; 		// NORMALS
-	private int[] 		triIndices;
+	private Mesh 		mesh = null;
+
+	private Vector3[] 	positions = null;
+	private Vector2[] 	uvR = null; 		// TEXCOORD0
+	private Vector2[] 	uvG = null; 		// TEXCOORD1
+	private Vector3[] 	uvB = null;			// NORMALS
+	private int[] 		triIndices = null;
+
+	DistMeshVert[] 		meshVerts;
+	DistScaleOffsetUV scaleOffset;
 
 	/// <summary>
 	/// Gets the ideal vertical FO.
@@ -139,26 +143,47 @@ public class OVRDistortionMesh
 	/// <param name="flipY">If set to <c>true</c> flip y.</param>
 	public void GenerateMesh(ref OVRLensCorrection lc, bool rightEye, bool flipY)
 	{
+		// We only need to create the mesh once and re-use components when camera 
+		// is dirty
+		bool create = true;
+		if (!mesh) 
+		{
+			mesh = new Mesh ();
+			mesh.MarkDynamic();
+		}
+		else
+			create = false;
+
 		int numVerts = 0; int numIndicies = 0;
 		// Generate OVR mesh for given eye
 		OVR_GenerateDistortionMesh(ref numVerts, ref numIndicies, rightEye);
+
 		// create space to copy mesh into
-		DistMeshVert[] meshVerts  = new DistMeshVert[numVerts];
-		triIndices = new int[numIndicies];
-		DistScaleOffsetUV scaleOffset = new DistScaleOffsetUV();
+		if (create) 
+		{
+			meshVerts = new DistMeshVert[numVerts];
+			triIndices = new int[numIndicies];
+			scaleOffset = new DistScaleOffsetUV ();
+		}
 		// Copy mesh into above data
-		OVR_CopyDistortionMesh(meshVerts, triIndices, ref scaleOffset, rightEye, flipY);
+
+		bool needsFlip = (SystemInfo.graphicsDeviceVersion.Contains ("GL")) ? flipY : !flipY;
+
+		OVR_CopyDistortionMesh(meshVerts, triIndices, ref scaleOffset, rightEye, needsFlip);
 		// Set material scale and offset values
-		lc._DMScale.x  = scaleOffset.Scale_x;
+		lc._DMScale.x  = 0.5f * scaleOffset.Scale_x;
 		lc._DMScale.y  = scaleOffset.Scale_y;
-		lc._DMOffset.x = scaleOffset.Offset_x;
+		lc._DMOffset.x = scaleOffset.Offset_x + ((rightEye) ? 0.25f : -0.25f);
 		lc._DMOffset.y = scaleOffset.Offset_y;
+
 		// Copy local mesh into proper Unity mesh structure
-		mesh 		= new Mesh();
-		positions 	= new Vector3[numVerts];
-		uvR 		= new Vector2[numVerts];
-		uvG 		= new Vector2[numVerts];
-		uvB 		= new Vector3[numVerts];
+		if (create) 
+		{
+			positions = new Vector3[numVerts];
+			uvR = new Vector2[numVerts];
+			uvG = new Vector2[numVerts];
+			uvB = new Vector3[numVerts];
+		}
 
 		for(int i = 0; i < numVerts; i++)
 		{
