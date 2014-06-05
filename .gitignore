@@ -1,4 +1,9 @@
+#These binary files are far too large for git to handle sensibly
 St Salvators.unity
+St Salvators 2.unity
+
+#Occlusion files are far too numerous for git to handle sensibly
+*.umbracache
 
 #################
 ## Eclipse
