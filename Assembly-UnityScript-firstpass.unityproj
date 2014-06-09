@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_0;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Unity installs/4.3.4f1/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Unity installs/4.5.0f6/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Unity installs/4.3.4f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Unity installs/4.5.0f6/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -61,28 +61,28 @@
      <None Include="Assets\OVR\OVRImageEffects\OVRLensCorrection.shader" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
  <Reference Include="I18N.CJK">
- <HintPath>Assets\Libraries\I18N.CJK.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.CJK.dll</HintPath>
  </Reference>
  <Reference Include="I18N">
- <HintPath>Assets\Libraries\I18N.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.dll</HintPath>
  </Reference>
  <Reference Include="I18N.MidEast">
- <HintPath>Assets\Libraries\I18N.MidEast.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.MidEast.dll</HintPath>
  </Reference>
  <Reference Include="I18N.Other">
- <HintPath>Assets\Libraries\I18N.Other.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.Other.dll</HintPath>
  </Reference>
  <Reference Include="I18N.Rare">
- <HintPath>Assets\Libraries\I18N.Rare.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.Rare.dll</HintPath>
  </Reference>
  <Reference Include="I18N.West">
- <HintPath>Assets\Libraries\I18N.West.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/I18N.West.dll</HintPath>
  </Reference>
  <Reference Include="mysql.data">
- <HintPath>Assets\Libraries\mysql.data.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/mysql.data.dll</HintPath>
  </Reference>
  <Reference Include="System.Data">
- <HintPath>Assets\Libraries\System.Data.dll</HintPath>
+ <HintPath>D:/Mirrorshades/Assets/Libraries/System.Data.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

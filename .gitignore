@@ -2,6 +2,9 @@
 St Salvators.unity
 St Salvators 2.unity
 
+#Unity's Library folder is auto-generated
+Library/
+
 #Occlusion files are far too numerous for git to handle sensibly
 *.umbracache
 
