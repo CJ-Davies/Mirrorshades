@@ -89,11 +89,24 @@ public class XboxCameras : MonoBehaviour {
             }
             //switching to RW
             else if (!B && Btog) {
-                WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
-                WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
 
-                WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
-                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
+                Debug.Log("rTrigger is " + rTrigger);
+                
+                if (rTrigger == 0) {
+                    WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
+                    WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
+
+                    WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
+                    WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
+                }
+                else {
+                    Debug.Log("Lerping to non zero");
+                    WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
+                    WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
+
+                    WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
+                    WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
+                }
             }
             //switching to trigger (VR or mix)
             else if (rTrigger != 0 && !Btog) {

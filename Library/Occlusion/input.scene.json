@@ -1,1 +1,1 @@
-{"output tome match":false,"smallest occluder":0.5,"hierarchy detail":1,"object group cost":0,"world size":{"x":0,"y":0,"z":0},"backface limit":100,"smallest hole":0.175,"output strict view volumes":false,"output visualizations":true,"tile size":4,"cluster size":0}
+{"output tome match":false,"smallest occluder":0.75,"hierarchy detail":1,"object group cost":0,"world size":{"x":0,"y":0,"z":0},"backface limit":5,"smallest hole":0.175,"output strict view volumes":false,"output visualizations":true,"tile size":6,"cluster size":0}
