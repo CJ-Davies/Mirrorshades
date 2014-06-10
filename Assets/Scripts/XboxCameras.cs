@@ -88,10 +88,7 @@ public class XboxCameras : MonoBehaviour {
                 WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(originalColour.a, 0.0f, 0.1f));
             }
             //switching to RW
-            else if (!B && Btog) {
-
-                Debug.Log("rTrigger is " + rTrigger);
-                
+            else if (!B && Btog) {          
                 if (rTrigger == 0) {
                     WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
                     WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity, 0.1f));
@@ -100,7 +97,6 @@ public class XboxCameras : MonoBehaviour {
                     WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamRight.renderer.material.color.a, baseOpacity, 0.1f));
                 }
                 else {
-                    Debug.Log("Lerping to non zero");
                     WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
                     WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(WebcamLeft.renderer.material.color.a, baseOpacity - rTrigger, 0.1f));
 
