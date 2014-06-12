@@ -14,7 +14,7 @@ public class NewPointScript : MonoBehaviour {
     Double anchorUnityX, anchorUnityY, anchorAtlasI, anchorAtlasJ, pixelsPerMeter;
     //Double anchorAtlasX, anchorAtlasY;
 
-    string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9016;Database=indooratlasdb;User ID=indooratlasr;Password=VbUo98ch;Pooling=true;CharSet=utf8;";
+    string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9013;Database=indooratlasdb;User ID=indooratlasw;Password=0pFUSwIL;Pooling=true;CharSet=utf8;";
     MySqlConnection con = null;
     MySqlCommand cmd = null;
     MySqlDataReader read = null;
@@ -74,7 +74,10 @@ public class NewPointScript : MonoBehaviour {
         // My Nexus 5
         //string query = "SELECT x, y from devicelocations where deviceID = '4192fe2d3b7fbf27';";
         //string query = "SELECT i, j, virtual from devicelocations where deviceID = '4192fe2d3b7fbf27';";
-        string query = "SELECT i, j from devicelocations where deviceID = '4192fe2d3b7fbf27';";
+        
+        //***
+        //string query = "SELECT i, j from devicelocations where deviceID = '4192fe2d3b7fbf27';";
+        string query = "SELECT i, j from devicelocations";
 
         //Group's Nexus 4
         //string query = "SELECT x, y from devicelocations where deviceID = 'c76129348d8acd2e';";
@@ -126,7 +129,7 @@ public class NewPointScript : MonoBehaviour {
                                 // Vector of NewPoint
                                 newPos = new Vector3((float)xNewPos, (float)transform.position.y, (float)yNewPos);
 
-                                //Debug.Log("New Vector3: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+                                Debug.Log("New Vector3: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
 
                                 // Actual transform (movement) code is in update() as that runs every frame whereas this method only runs every x seconds (it's a coroutine with WaitForSeconds at the end)
                             }
