@@ -41,7 +41,7 @@ public class DataLogger : MonoBehaviour {
         firstRun = true;
         timestamp = DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss-fff");
         filePath = "Mirrorshades " + timestamp + ".log";
-	    player = GameObject.Find("OVRPlayerController2");
+	    player = GameObject.Find("OVRPlayerController3");
         leftCam = GameObject.Find("CameraLeft");
         rightCam = GameObject.Find("CameraRight");
         leftWebCamTexture = GameObject.Find("WebcamLeft");
@@ -105,6 +105,7 @@ public class DataLogger : MonoBehaviour {
         
         ++count;
         ++frame;
+
 	}
 
     void OnApplicationQuit() {

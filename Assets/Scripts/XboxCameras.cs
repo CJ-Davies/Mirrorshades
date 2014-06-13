@@ -23,7 +23,7 @@ public class XboxCameras : MonoBehaviour {
         //CameraLeft = GameObject.Find("CameraLeft");
         //CameraRight = GameObject.Find("CameraRight");
 
-        player = GameObject.Find("OVRPlayerController2");
+        player = GameObject.Find("OVRPlayerController3");
 
         WebcamLeft = GameObject.Find("WebcamLeft");
         WebcamRight = GameObject.Find("WebcamRight");

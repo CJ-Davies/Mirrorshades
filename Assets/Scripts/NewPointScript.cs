@@ -14,7 +14,8 @@ public class NewPointScript : MonoBehaviour {
     Double anchorUnityX, anchorUnityY, anchorAtlasI, anchorAtlasJ, pixelsPerMeter;
     //Double anchorAtlasX, anchorAtlasY;
 
-    string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9013;Database=indooratlasdb;User ID=indooratlasw;Password=0pFUSwIL;Pooling=true;CharSet=utf8;";
+    //string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9013;Database=indooratlasdb;User ID=indooratlasw;Password=0pFUSwIL;Pooling=true;CharSet=utf8;";
+    string conStr = "Server=127.0.0.1;Port=9013;Database=indooratlasdb;User ID=indooratlasw;Password=0pFUSwIL;Pooling=true;CharSet=utf8;";
     MySqlConnection con = null;
     MySqlCommand cmd = null;
     MySqlDataReader read = null;
@@ -129,7 +130,7 @@ public class NewPointScript : MonoBehaviour {
                                 // Vector of NewPoint
                                 newPos = new Vector3((float)xNewPos, (float)transform.position.y, (float)yNewPos);
 
-                                Debug.Log("New Vector3: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+                                //Debug.Log("New Vector3: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
 
                                 // Actual transform (movement) code is in update() as that runs every frame whereas this method only runs every x seconds (it's a coroutine with WaitForSeconds at the end)
                             }
