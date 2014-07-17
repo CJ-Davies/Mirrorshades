@@ -14,6 +14,8 @@ public class NewPointScript : MonoBehaviour {
     Double anchorUnityX, anchorUnityY, anchorAtlasI, anchorAtlasJ, pixelsPerMeter;
     //Double anchorAtlasX, anchorAtlasY;
 
+    public float lerpLevel = 0.275f;
+
     //string conStr = "Server=straylight.cs.st-andrews.ac.uk;Port=9013;Database=indooratlasdb;User ID=indooratlasr;Password=9/~ee+8W;Pooling=true;CharSet=utf8;";
     string conStr = "Server=127.0.0.1;Port=9013;Database=indooratlasdb;User ID=indooratlasr;Password=9/~ee+8W;Pooling=true;CharSet=utf8;";
     MySqlConnection con = null;
@@ -27,6 +29,8 @@ public class NewPointScript : MonoBehaviour {
     void Start() {
 
         AnchorPoint = GameObject.Find("AnchorPoint");
+
+        //GameObject.Find("NewPointTest").renderer.material.color = new Color(1.0f, 1.0f, 0f);
 
         try {
             con = new MySqlConnection(conStr);
@@ -63,7 +67,7 @@ public class NewPointScript : MonoBehaviour {
         if (!(float.IsPositiveInfinity(newPos.x)) && !(float.IsNegativeInfinity(newPos.x)) &&
             !(float.IsPositiveInfinity(newPos.y)) && !(float.IsNegativeInfinity(newPos.y)) &&
             !(float.IsPositiveInfinity(newPos.z)) && !(float.IsNegativeInfinity(newPos.z))) {
-            this.transform.position = Vector3.Lerp(transform.position, newPos, 0.1f);
+            this.transform.position = Vector3.Lerp(transform.position, newPos, lerpLevel);
         }
 
     }

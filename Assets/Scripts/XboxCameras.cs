@@ -5,7 +5,7 @@ public class XboxCameras : MonoBehaviour {
 
     public bool A { get; set; }
     public bool B { get; set; }
-    public bool X { get; set; }
+    //public bool X { get; set; }
     public float rTrigger { get; set; }
     public bool autoTick { get; set; }
 
@@ -23,7 +23,7 @@ public class XboxCameras : MonoBehaviour {
         //CameraLeft = GameObject.Find("CameraLeft");
         //CameraRight = GameObject.Find("CameraRight");
 
-        player = GameObject.Find("OVRPlayerController3");
+        player = GameObject.Find("MirrorshadesController");
 
         WebcamLeft = GameObject.Find("WebcamLeft");
         WebcamRight = GameObject.Find("WebcamRight");
@@ -46,14 +46,20 @@ public class XboxCameras : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        A = Input.GetButton("Fire1");
-        B = Input.GetButton("Fire2");
-        X = Input.GetButton("Fire3");
-        rTrigger = Input.GetAxis("Horizontal");
+        //hack for only lerp'd build
+        A = false;
+        B = Input.GetButton("Fire1");   //B = A
+        //X = Input.GetButton("Fire3");
+        rTrigger = 0;
 
-        if (X) {
-            player.GetComponent<DataLogger>().activated = true;
-        }
+        //A = Input.GetButton("Fire1");
+        //B = Input.GetButton("Fire2");
+        //X = Input.GetButton("Fire3");
+        //rTrigger = Input.GetAxis("Horizontal");
+
+        //if (X) {
+            //player.GetComponent<DataLogger>().activated = true;
+        //}
 
         //If base opacity is anything other than 1, map the triggers range so that the whole range is used for what opacity we have.
         if (baseOpacity != 1) {

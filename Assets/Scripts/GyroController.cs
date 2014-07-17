@@ -33,9 +33,6 @@ public class GyroController : MonoBehaviour
 	protected void Start () 
 	{
 		AttachGyro();
-
-        //***
-        Input.gyro.enabled = gyroEnabled;
 	}
 
 	protected void Update() 
@@ -51,16 +48,16 @@ public class GyroController : MonoBehaviour
 		if (!debug)
 			return;
 
-        //GUILayout.Label("Orientation: " + Screen.orientation);
-        //GUILayout.Label("Calibration: " + calibration);
-        //GUILayout.Label("Camera base: " + cameraBase);
-        //GUILayout.Label("input.gyro.attitude: " + Input.gyro.attitude);
-        //GUILayout.Label("transform.rotation: " + transform.rotation);
+		GUILayout.Label("Orientation: " + Screen.orientation);
+		GUILayout.Label("Calibration: " + calibration);
+		GUILayout.Label("Camera base: " + cameraBase);
+		GUILayout.Label("input.gyro.attitude: " + Input.gyro.attitude);
+		GUILayout.Label("transform.rotation: " + transform.rotation);
 
-        //if (GUILayout.Button("On/off gyro: " + Input.gyro.enabled, GUILayout.Height(100)))
-        //{
-        //    Input.gyro.enabled = !Input.gyro.enabled;
-        //}
+		if (GUILayout.Button("On/off gyro: " + Input.gyro.enabled, GUILayout.Height(100)))
+		{
+			Input.gyro.enabled = !Input.gyro.enabled;
+		}
 
 		if (GUILayout.Button("On/off gyro controller: " + gyroEnabled, GUILayout.Height(100)))
 		{
@@ -74,29 +71,25 @@ public class GyroController : MonoBehaviour
 			}
 		}
 
-        // *** what does this do?
-        //if (GUILayout.Button("Update gyro calibration (Horizontal only)", GUILayout.Height(80)))
-        //{
-        //    UpdateCalibration(true);
-        //}
+		if (GUILayout.Button("Update gyro calibration (Horizontal only)", GUILayout.Height(80)))
+		{
+			UpdateCalibration(true);
+		}
 
-        // *** what does this do?
-        //if (GUILayout.Button("Update camera base rotation (Horizontal only)", GUILayout.Height(80)))
-        //{
-        //    UpdateCameraBaseRotation(true);
-        //}
+		if (GUILayout.Button("Update camera base rotation (Horizontal only)", GUILayout.Height(80)))
+		{
+			UpdateCameraBaseRotation(true);
+		}
 
-        // *** what does this do?
-        //if (GUILayout.Button("Reset base orientation", GUILayout.Height(80)))
-        //{
-        //    ResetBaseOrientation();
-        //}
+		if (GUILayout.Button("Reset base orientation", GUILayout.Height(80)))
+		{
+			ResetBaseOrientation();
+		}
 
-        // *** what does this do?
-        //if (GUILayout.Button("Reset camera rotation", GUILayout.Height(80)))
-        //{
-        //    transform.rotation = Quaternion.identity;
-        //}
+		if (GUILayout.Button("Reset camera rotation", GUILayout.Height(80)))
+		{
+			transform.rotation = Quaternion.identity;
+		}
 	}
 
 	#endregion

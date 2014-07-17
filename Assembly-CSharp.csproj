@@ -67,6 +67,7 @@
      <Compile Include="Assets\OVR\Scripts\OVRVisionGuide.cs" />
      <Compile Include="Assets\Scripts\AnchorPointScript.cs" />
      <Compile Include="Assets\Scripts\DataLogger.cs" />
+     <Compile Include="Assets\Scripts\DataLoggerStationary.cs" />
      <Compile Include="Assets\Scripts\FPSScript.cs" />
      <Compile Include="Assets\Scripts\GyroCameraScript.cs" />
      <Compile Include="Assets\Scripts\GyroController.cs" />

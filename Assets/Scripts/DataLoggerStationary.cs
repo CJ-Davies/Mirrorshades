@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.IO;
 
-public class DataLogger : MonoBehaviour {
+public class DataLoggerStationary : MonoBehaviour {
 
     //whether logging has been invoked
     public bool activated { get; set; }
@@ -36,25 +36,27 @@ public class DataLogger : MonoBehaviour {
     // <rightWebCamOpacity> <autoTick> <autoSwitchDuration> <autoSwitchSpacing> <fps> <A button> <B button> <rTrigger>
     string lines;
 
-    void Start () {
+    void Start() {
         activated = false;
         firstRun = true;
         timestamp = DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss-fff");
         filePath = "Mirrorshades " + timestamp + ".log";
-	    player = GameObject.Find("MirrorshadesController");
+        player = GameObject.Find("MirrorshadesController");
         leftCam = GameObject.Find("CameraLeft");
         rightCam = GameObject.Find("CameraRight");
-        leftWebCamTexture = GameObject.Find("WebcamLeft");
-        rightWebCamTexture = GameObject.Find("WebcamRight");
+        
+        //these objects don't exist in statrionary scenario
+        //leftWebCamTexture = GameObject.Find("WebcamLeft");
+        //rightWebCamTexture = GameObject.Find("WebcamRight");
 
         //write header to log
         file = new StreamWriter(filePath, true);
-        file.Write("\"frame\"\t\"timestamp\"\t\"original_position\"\t\"position\"\t\"delta_x\"\t\"delta_z\"\t\"left_rotation\"\t\"right_rotation\"\t\"base_oapcity\"\t\"left_opacity" + 
+        file.Write("\"frame\"\t\"timestamp\"\t\"original_position\"\t\"position\"\t\"delta_x\"\t\"delta_z\"\t\"left_rotation\"\t\"right_rotation\"\t\"base_oapcity\"\t\"left_opacity" +
             "\"\t\"right_opacity\"\t\"auto_tick\"\t\"auto_duration\"\t\"auto_spacing\"\t\"framerate\"\t\"A_button\"\t\"B_button\"\t\"right_trigger\"\n");
         file.Close();
-	}
-	
-	void Update () {
+    }
+
+    void Update() {
 
         if (!activated) {
             activated = Input.GetButton("Fire3");
@@ -80,20 +82,22 @@ public class DataLogger : MonoBehaviour {
         deltaZ = Math.Abs(originalPosition.z - position.z);
         leftRotation = leftCam.transform.rotation;
         rightRotation = rightCam.transform.rotation;
-        baseOpacity = player.GetComponent<XboxCameras>().baseOpacity;
-        leftWebCamTextureOpacity = leftWebCamTexture.renderer.material.color.a;
-        rightWebCamTextureOpacity = rightWebCamTexture.renderer.material.color.a;
-        autoTick = player.GetComponent<XboxCameras>().autoTick;
-        autoSwitchDuration = player.GetComponent<XboxCameras>().autoSwitchDuration;
-        autoSwitchSpacing = player.GetComponent<XboxCameras>().autoSwitchSpacing;
-        A = player.GetComponent<XboxCameras>().A;
-        B = player.GetComponent<XboxCameras>().B;
-        rTrigger = player.GetComponent<XboxCameras>().rTrigger;
+
+        //these values are irrelevant for stationary scenario, so hardcoded
+        baseOpacity = 1.0f;
+        leftWebCamTextureOpacity = 0.0f;
+        rightWebCamTextureOpacity = 0.0f;
+        autoTick = false;
+        autoSwitchDuration = 0.0f;
+        autoSwitchSpacing = 0.0f;
+        A = false;
+        B = false;
+        rTrigger = 0.0f;
 
         //assembling the current frame's log line
         lines += ((frame + "\t" + timestamp + "\t" + originalPosition + "\t" + position + "\t" + deltaX + "\t" + deltaZ + "\t" + leftRotation + "\t"
               + rightRotation + "\t" + baseOpacity + "\t" + leftWebCamTextureOpacity + "\t" + rightWebCamTextureOpacity + "\t" + autoTick + "\t"
-              + autoSwitchDuration + "\t" + autoSwitchSpacing + "\t" +  fps + "\t" + A + "\t" + B + "\t" + rTrigger + "\n"));
+              + autoSwitchDuration + "\t" + autoSwitchSpacing + "\t" + fps + "\t" + A + "\t" + B + "\t" + rTrigger + "\n"));
 
         //on each certain multiple of frames, write the contents of lines out to a file & then clear lines
         if (count == 100) {
@@ -105,11 +109,11 @@ public class DataLogger : MonoBehaviour {
             count = -1;
             lines = "";
         }
-        
+
         ++count;
         ++frame;
 
-	}
+    }
 
     void OnApplicationQuit() {
         file.Close();
