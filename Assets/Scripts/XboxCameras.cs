@@ -57,6 +57,8 @@ public class XboxCameras : MonoBehaviour {
         //X = Input.GetButton("Fire3");
         //rTrigger = Input.GetAxis("Horizontal");
 
+        //Debug.Log("rTrigger:" + rTrigger);
+
         //if (X) {
             //player.GetComponent<DataLogger>().activated = true;
         //}
@@ -115,10 +117,10 @@ public class XboxCameras : MonoBehaviour {
                 originalColour = WebcamLeft.renderer.material.color;
                 WebcamLeft.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 1 - mappedTrig);
                 WebcamLeftBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 1 - mappedTrig);
-
+                
                 originalColour = WebcamRight.renderer.material.color;
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, 1 - mappedTrig);
-                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 1 - mappedTrig);  
+                WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, 1 - mappedTrig);
             }
             //switching to RW
             else if (rTrigger == 0 && !Btog) {
@@ -130,6 +132,7 @@ public class XboxCameras : MonoBehaviour {
                 originalColour = WebcamRight.renderer.material.color;
                 WebcamRight.renderer.material.color = new Color(originalColour.r, originalColour.g, originalColour.b, baseOpacity);
                 WebcamRightBacking.renderer.material.color = new Color(0.0f, 0.0f, 0.0f, baseOpacity);
+                
             }
             if (Btog && WebcamLeft.renderer.material.color.a >= (baseOpacity - 0.05) && WebcamRight.renderer.material.color.a >= (baseOpacity - 0.05)) {
                 Btog = false;
